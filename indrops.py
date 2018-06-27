@@ -872,7 +872,7 @@ class IndropsLibrary():
             print_to_stderr(err.output)
             raise Exception(" === Error in samtools index === ")
 
-        print(genomic_bams)
+        #print(genomic_bams)
         for filename in genomic_bams:
             os.remove(filename)
             os.remove(filename + '.bai')
@@ -1001,6 +1001,8 @@ class IndropsLibrary():
         total_workers = set(int(w.split('_')[1]) for w in worker_names)
         if len(total_workers) > 1:
             raise Exception("""Quantification for library %s, prefix '%s' was run with different numbers of total_workers.""" % (self.name, analysis_prefix))
+        if not list(total_workers):
+            raise Exception("""No data from quantification step found!""")
         total_workers = list(total_workers)[0]
 
         missing_workers = []
