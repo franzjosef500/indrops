@@ -1253,7 +1253,7 @@ class LibrarySequencingPart():
             with FIFO(dir=filtered_dir) as fifo1:
 
                 trimmomatic_cmd = [self.project.paths.java, '-Xmx500m', '-jar', self.project.paths.trimmomatic_jar,
-                        'SE', '-threads', "6", '-phred33', fifo1.filename, fifo2.filename]
+                        'SE', '-threads', "1", '-phred33', fifo1.filename, fifo2.filename]
                 for arg in self.project.parameters['trimmomatic_arguments']['argument_order']:
                     val = self.project.parameters['trimmomatic_arguments'][arg]
                     trimmomatic_cmd.append('%s:%s' % (arg, val))
@@ -1791,3 +1791,4 @@ if __name__=="__main__":
         for library in target_libraries:
             project.libraries[library].output_barcode_fastq(worker_index=args.worker_index, total_workers=args.total_workers,
                     min_reads=args.min_reads, max_reads=args.max_reads, analysis_prefix=args.analysis_prefix, run_filter=target_runs)
+
